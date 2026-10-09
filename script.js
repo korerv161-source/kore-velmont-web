@@ -10,6 +10,17 @@ nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => 
   menuToggle?.setAttribute('aria-expanded', 'false');
 }));
 
+// Hace que el botón del hero siempre lleve a la sección del archivo.
+document.querySelectorAll('a[href="#archivo"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const section = document.getElementById('archivo');
+    if (!section) return;
+    event.preventDefault();
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', '#archivo');
+  });
+});
+
 const search = document.getElementById('book-search');
 const grid = document.getElementById('book-grid');
 const count = document.getElementById('record-count');
@@ -29,34 +40,46 @@ function updateSearch() {
   if (empty) empty.hidden = visible !== 0;
 }
 search?.addEventListener('input', updateSearch);
-document.getElementById('year')?.textContent = new Date().getFullYear();
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
 
 document.getElementById('subscribe-form')?.addEventListener('submit', event => {
   event.preventDefault();
-  const email = document.getElementById('reader-email')?.value.trim();
+  const emailInput = document.getElementById('reader-email');
+  const email = emailInput?.value.trim();
   const message = document.getElementById('form-message');
   if (!email || !message) return;
   message.textContent = 'La lista de lectores todavía no está conectada.';
-  document.getElementById('reader-email').value = '';
+  emailInput.value = '';
 });
 
-// La clave publishable es pública. La base de datos limita la lectura a estado = publicado mediante RLS.
 const SUPABASE_URL = 'https://gixqmwlclafjfexxfyic.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_m5J_8zeHSLBGzYpkafaRMQ_00JKG1Iw';
 
 async function cargarRelatosPublicados() {
   const loading = document.getElementById('published-loading');
   if (!grid) return;
+  if (loading) loading.textContent = 'Consultando los expedientes publicados…';
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/historias?select=id,titulo,sinopsis,contenido,categoria,portada_url,created_at&estado=eq.publicado&order=created_at.desc`, {
+    const url = `${SUPABASE_URL}/rest/v1/historias?select=id,titulo,sinopsis,contenido,categoria,portada_url,created_at&estado=eq.publicado&order=created_at.desc`;
+    const response = await fetch(url, {
+      method: 'GET',
       headers: {
         apikey: SUPABASE_PUBLISHABLE_KEY,
-        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
-      }
+        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        Accept: 'application/json'
+      },
+      cache: 'no-store'
     });
-    if (!response.ok) throw new Error(`Respuesta ${response.status}`);
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`Supabase respondió ${response.status}. ${detail.slice(0, 220)}`);
+    }
     const historias = await response.json();
     loading?.remove();
+
+    // Evita duplicar historias si la función se ejecuta más de una vez.
+    grid.querySelectorAll('.published-story-card').forEach(card => card.remove());
     historias.forEach(historia => {
       const card = document.createElement('article');
       card.className = 'book-card published-story-card';
@@ -88,6 +111,7 @@ async function cargarRelatosPublicados() {
         const body = document.createElement('div');
         body.className = 'story-body';
         historia.contenido.split(/\n\s*\n/).forEach(paragraph => {
+          if (!paragraph.trim()) return;
           const p = document.createElement('p');
           p.textContent = paragraph;
           body.appendChild(p);
@@ -99,10 +123,14 @@ async function cargarRelatosPublicados() {
       grid.appendChild(card);
     });
     updateSearch();
+    if (historias.length === 0 && loading) loading.textContent = 'Todavía no hay relatos publicados.';
   } catch (error) {
-    loading?.remove();
-    if (loading) loading.textContent = 'No se pudieron cargar los relatos publicados.';
-    console.error('No se pudieron cargar los relatos públicos:', error);
+    console.error('Error cargando relatos públicos:', error);
+    if (loading) {
+      loading.hidden = false;
+      loading.textContent = `No se pudieron cargar los relatos publicados. Detalle: ${error.message}`;
+    }
   }
 }
+
 cargarRelatosPublicados();
