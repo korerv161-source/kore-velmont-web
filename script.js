@@ -21,7 +21,7 @@ document.getElementById('subscribe-form')?.addEventListener('submit', event => {
 });
 
 const SUPABASE_URL = 'https://gixqmwlclafjfexxfyic.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_m5J_8zeHSLBGZyYpkafaRMQ_00JKG1Iw';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_m5J_8zeHSLBGzYpkafaRMQ_00JKG1Iw';
 const storiesContainer = document.getElementById('stories-container');
 const storySearch = document.getElementById('story-search');
 const storyCount = document.getElementById('story-count');
