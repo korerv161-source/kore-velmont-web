@@ -1,0 +1,10 @@
+KORE VELMONT — WEB DE AUTORA
+
+Archivos del sitio: index.html, styles.css, script.js y anatomia-de-una-casa.jpg.
+
+La ficha destaca únicamente Anatomía de una Casa e incluye un extracto de lectura. El botón de Amazon abre una búsqueda del título y la autora porque aún no se ha proporcionado el enlace directo de compra.
+
+Para publicar, sube/reemplaza estos archivos en la raíz del repositorio GitHub Pages. No borres styles.css ni script.js. El formulario de suscripción es solo visual y todavía no guarda direcciones de correo.
+
+
+ACTUALIZACIÓN: esta versión incluye la sección Sobre la autora y la imagen kore-velmont-retrato.png. Sube juntos index.html, styles.css, script.js, anatomia-de-una-casa.jpg y kore-velmont-retrato.png al repositorio para conservar el diseño y las imágenes.
