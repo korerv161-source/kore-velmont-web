@@ -1,6 +1,7 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.main-nav');
 menuToggle?.addEventListener('click', () => {
+  if (!nav) return;
   const isOpen = nav.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(isOpen));
   menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
@@ -8,7 +9,8 @@ menuToggle?.addEventListener('click', () => {
 nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   nav.classList.remove('open'); menuToggle?.setAttribute('aria-expanded', 'false');
 }));
-document.getElementById('year')?.textContent = new Date().getFullYear();
+const yearElement = document.getElementById('year');
+if (yearElement) yearElement.textContent = new Date().getFullYear();
 document.getElementById('subscribe-form')?.addEventListener('submit', event => {
   event.preventDefault();
   const email = document.getElementById('reader-email')?.value.trim();
@@ -83,18 +85,61 @@ function renderStories() {
 }
 storySearch?.addEventListener('input', renderStories);
 async function loadPublishedStories() {
+  // Evita que la sección se quede eternamente en «CARGANDO».
+  const timeout = new AbortController();
+  const timer = setTimeout(() => timeout.abort(), 12000);
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/historias?select=id,titulo,sinopsis,contenido,categoria,portada_url,created_at&estado=eq.publicado&order=created_at.desc`, {
-      headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}` }
+    if (!storiesContainer) throw new Error('No se encontró el contenedor de relatos en index.html.');
+    if (storiesLoading) storiesLoading.hidden = false;
+    if (storiesError) { storiesError.hidden = true; storiesError.textContent = ''; }
+    const url = `${SUPABASE_URL}/rest/v1/historias?select=id,titulo,sinopsis,contenido,categoria,portada_url,created_at&estado=eq.publicado&order=created_at.desc`;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        Accept: 'application/json'
+      },
+      signal: timeout.signal
     });
-    if (!response.ok) throw new Error(`Supabase respondió ${response.status}. Comprueba que la tabla historias esté expuesta y que la política SELECT permita leer publicados.`);
-    publishedStories = await response.json();
-    storiesLoading?.remove(); renderStories();
+    if (!response.ok) {
+      let detail = '';
+      try { const data = await response.json(); detail = data.message || data.details || data.hint || ''; } catch (_) {}
+      throw new Error(`Supabase respondió ${response.status}${detail ? `: ${detail}` : '. Revisa la exposición de la tabla y la política SELECT.'}`);
+    }
+    const data = await response.json();
+    if (!Array.isArray(data)) throw new Error('Supabase devolvió una respuesta inesperada.');
+    publishedStories = data;
+    if (storiesLoading) storiesLoading.hidden = true;
+    if (storiesLoading) storiesLoading.textContent = 'Consultando los expedientes publicados…';
+    renderStories();
   } catch (error) {
-    storiesLoading?.remove();
-    if (storiesError) { storiesError.hidden = false; storiesError.textContent = `No se pudieron cargar los relatos: ${error.message}`; }
+    if (storiesLoading) {
+      storiesLoading.hidden = true;
+      storiesLoading.textContent = 'Consultando los expedientes publicados…';
+    }
+    if (storiesError) {
+      storiesError.hidden = false;
+      storiesError.textContent = error.name === 'AbortError'
+        ? 'La conexión con el archivo tardó demasiado. Recarga la página e inténtalo de nuevo.'
+        : `No se pudieron cargar los relatos: ${error.message}`;
+    }
     if (storyCount) storyCount.textContent = 'ERROR DE CARGA';
-    console.error(error);
+    console.error('Error cargando relatos publicados:', error);
+  } finally {
+    clearTimeout(timer);
   }
 }
+
+// El enlace «Entrar al archivo» lleva directamente a la sección de relatos.
+document.querySelectorAll('a[href="#archivo"], a[href="#relatos"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const target = document.getElementById('archivo') || document.getElementById('relatos');
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', `#${target.id}`);
+  });
+});
+
 loadPublishedStories();
