@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0a0b">
+  <meta name="description" content="Kore Velmont: archivo de historias extrañas, horror, misterio y ficción oscura.">
+  <title>Kore Velmont | Archivo prohibido</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="wordmark" href="#inicio" aria-label="Kore Velmont, inicio">
+      <span class="sigil">KV</span><span>KORE <i>VELMONT</i></span>
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#archivo">El archivo</a>
+      <a href="#relatos">Relatos</a>
+      <a href="#universos">Universos</a>
+      <a href="#bitacora">Bitácora</a>
+      <a class="nav-contact" href="#suscripcion">Acceso de lectores ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> ARCHIVO KV · ACCESO RESTRINGIDO</p>
+        <h1>Hay historias<br>que <em>no deberían</em><br>encontrarse.</h1>
+        <p class="hero-intro">Un registro de casas imposibles, memorias defectuosas y cosas que observan desde el otro lado de lo cotidiano.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#archivo">Entrar al archivo <span>↘</span></a>
+          <a class="text-link" href="#sobre">Conocer a la autora</a>
+        </div>
+        <div class="hero-meta"><span>EXPEDIENTE 001—∞</span><span>NO TODO DEBE SER LEÍDO</span></div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Silueta oscura frente a una puerta entreabierta">
+        <div class="door-halo"></div><div class="door-frame"><div class="door"><span class="door-eye"></span><span class="door-handle"></span></div></div>
+        <div class="art-label">FIG. 01 <span>UMBRAL</span></div>
+        <div class="art-cross">✳</div>
+      </div>
+      <div class="hero-index">KV / 08—10—26</div>
+    </section>
+
+    <section class="ticker" aria-label="Aviso"><div>NO HAY GARANTÍA DE REGRESO <b>✳</b> LAS CASAS TAMBIÉN RECUERDAN <b>✳</b> ALGUNOS EXPEDIENTES SIGUEN ABIERTOS <b>✳</b> NO HAY GARANTÍA DE REGRESO <b>✳</b></div></section>
+
+    <section class="section archive-section" id="archivo">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 / COLECCIÓN PRINCIPAL</p><h2>El archivo <em>abierto</em></h2></div>
+        <p class="section-note">Obras registradas. Algunas todavía respiran.</p>
+      </div>
+      <div class="filter-row">
+        <label class="search-box"><span>⌕</span><input id="book-search" type="search" placeholder="Buscar por título..." aria-label="Buscar libros"></label>
+        <span class="record-count" id="record-count">03 REGISTROS</span>
+      </div>
+      <div class="book-grid" id="book-grid">
+        <article class="book-card" data-search="anatomía de una casa horror casa relatos">
+          <div class="book-cover cover-house"><span class="cover-top">KORE VELMONT <small>ARCHIVO DE FICCIÓN</small></span><div class="house-shape"><span></span></div><span class="cover-title">ANATOMÍA<br>DE UNA CASA</span><span class="cover-bottom">EXPEDIENTE 001</span></div>
+          <div class="book-info"><p class="card-kicker">EXP. 001 · ANTOLOGÍA</p><h3>Anatomía de una Casa</h3><p>Un hogar debería ser un refugio. Pero algunas paredes guardan cosas que nunca debieron despertar.</p><a class="card-link" href="#contacto" data-book="Anatomía de una Casa">Consultar el expediente <span>↗</span></a></div>
+        </article>
+        <article class="book-card" data-search="contar hasta diez thriller misterio">
+          <div class="book-cover cover-count"><span class="cover-top">KORE VELMONT <small>ARCHIVO DE FICCIÓN</small></span><div class="count-number">10</div><span class="cover-title">CONTAR<br>HASTA DIEZ</span><span class="cover-bottom">EXPEDIENTE 002</span></div>
+          <div class="book-info"><p class="card-kicker">EXP. 002 · THRILLER</p><h3>Contar hasta Diez</h3><p>Un thriller de misterio donde cada respuesta abre una pregunta más peligrosa.</p><a class="card-link" href="#contacto" data-book="Contar hasta Diez">Consultar el expediente <span>↗</span></a></div>
+        </article>
+        <article class="book-card" data-search="el infierno me reclamó romance oscuro dark romance">
+          <div class="book-cover cover-hell"><span class="cover-top">KORE VELMONT <small>ARCHIVO DE FICCIÓN</small></span><div class="red-orbit"></div><span class="cover-title">EL INFIERNO<br>ME RECLAMÓ</span><span class="cover-bottom">EXPEDIENTE 003</span></div>
+          <div class="book-info"><p class="card-kicker">EXP. 003 · ROMANCE OSCURO</p><h3>El Infierno Me Reclamó</h3><p>Una historia de deseo, oscuridad y vínculos que quizá debieron permanecer rotos.</p><a class="card-link" href="#contacto" data-book="El Infierno Me Reclamó">Consultar el expediente <span>↗</span></a></div>
+        </article>
+      </div>
+      <p class="empty-state" id="empty-state" hidden>No se encontró ningún expediente con ese título.</p>
+      <p class="small-disclaimer">Las portadas de esta primera versión son composiciones provisionales creadas con CSS. Sustitúyelas por las portadas oficiales antes de publicar.</p>
+    </section>
+
+    <section class="manifesto" id="sobre">
+      <div class="manifesto-mark">KV<span>✳</span></div>
+      <div><p class="eyebrow">02 / NOTA DE LA AUTORA</p><h2>No escribo para explicar<br>la oscuridad. <em>La documento.</em></h2><p>Kore Velmont escribe horror, misterio, ficción oscura y relatos que se infiltran en lo familiar hasta volverlo irreconocible. Este sitio reúne sus libros, universos y registros narrativos.</p><a class="text-link" href="#contacto">Correspondencia con la autora ↗</a></div>
+    </section>
+
+    <section class="section split-section" id="relatos">
+      <div class="section-heading"><div><p class="eyebrow">03 / FRAGMENTOS RECUPERADOS</p><h2>Relatos <em>y anomalías</em></h2></div></div>
+      <div class="feature-record"><div class="record-symbol">◉</div><div><p class="card-kicker">REGISTRO DE MUESTRA · 00:17</p><h3>La casa que recordaba</h3><p>La primera noche, el pasillo tenía cuatro puertas. La segunda, cinco. Nadie en la familia quiso hablar de la sexta.</p><span class="coming-soon">FRAGMENTO DE DEMOSTRACIÓN · NO ES UN RELATO PUBLICADO</span></div><span class="record-number">R—001</span></div>
+    </section>
+
+    <section class="universe-section" id="universos">
+      <div class="section universe-inner"><div><p class="eyebrow">04 / CARTOGRAFÍA IMPOSIBLE</p><h2>Universos que<br>se <em>filtran</em> entre sí.</h2><p>Historias que parecen aisladas. Señales que se repiten. Un archivo que quizá nunca estuvo dividido.</p></div><div class="orbit-art" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="orbit orbit-three"></span><span class="orbit-core">?</span><span class="orbit-label label-a">CASA</span><span class="orbit-label label-b">MEMORIA</span><span class="orbit-label label-c">UMBRAL</span></div></div>
+    </section>
+
+    <section class="section journal-section" id="bitacora">
+      <div class="section-heading"><div><p class="eyebrow">05 / NOTAS AL MARGEN</p><h2>La bitácora</h2></div><span class="record-count">ACTUALIZACIONES</span></div>
+      <div class="journal-list"><article><span class="journal-date">NOTA 01</span><h3>Sobre escribir lo que no tiene nombre</h3><p>Apuntes sobre horror, atmósfera y aquello que una historia decide ocultar.</p><span class="journal-status">PRÓXIMAMENTE</span></article><article><span class="journal-date">NOTA 02</span><h3>Detrás de los expedientes</h3><p>Procesos, ideas y materiales que alimentan los mundos de Kore Velmont.</p><span class="journal-status">PRÓXIMAMENTE</span></article></div>
+    </section>
+
+    <section class="subscribe-section" id="suscripcion">
+      <div class="subscribe-stamp">SOLO<br>LECTORES<br>INVITADOS</div>
+      <div class="subscribe-copy"><p class="eyebrow">06 / CORRESPONDENCIA CIFRADA</p><h2>Recibe noticias<br>del <em>otro lado.</em></h2><p>Novedades editoriales, nuevos relatos y notas de los expedientes. Sin ruido innecesario.</p>
+        <form id="subscribe-form"><label for="reader-email">TU CORREO ELECTRÓNICO</label><div class="subscribe-input"><input id="reader-email" type="email" placeholder="lector@ejemplo.com" required><button type="submit" aria-label="Solicitar suscripción">↗</button></div><p class="form-note">Esta versión de prueba no almacena ni envía correos. Antes de publicar, conecta un servicio de suscripción real.</p><p id="form-message" class="form-message" aria-live="polite"></p></form>
+      </div>
+    </section>
+
+    <section class="contact-strip" id="contacto"><p class="eyebrow">¿TIENES INFORMACIÓN SOBRE UN EXPEDIENTE?</p><h2>La correspondencia<br>permanece <em>abierta.</em></h2><a class="button button-outline" href="mailto:TU-CORREO@EJEMPLO.COM?subject=Correspondencia%20con%20Kore%20Velmont">Escribir a la autora ↗</a><p class="small-disclaimer">Recuerda sustituir TU-CORREO@EJEMPLO.COM por tu correo real.</p></section>
+  </main>
+
+  <footer class="site-footer"><a class="wordmark" href="#inicio"><span class="sigil">KV</span><span>KORE <i>VELMONT</i></span></a><p>ARCHIVO DE FICCIÓN OSCURA · © <span id="year"></span> KORE VELMONT</p><a href="#inicio">VOLVER ARRIBA ↑</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>
