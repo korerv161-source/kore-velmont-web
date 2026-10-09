@@ -28,14 +28,6 @@ search?.addEventListener('input', () => {
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-document.querySelectorAll('[data-book]').forEach(link => {
-  link.addEventListener('click', () => {
-    const subject = encodeURIComponent(`Consulta sobre ${link.dataset.book}`);
-    const contact = document.querySelector('.contact-strip .button');
-    if (contact) contact.href = `mailto:TU-CORREO@EJEMPLO.COM?subject=${subject}`;
-  });
-});
-
 document.getElementById('subscribe-form')?.addEventListener('submit', event => {
   event.preventDefault();
   const email = document.getElementById('reader-email').value.trim();
