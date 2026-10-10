@@ -36,44 +36,13 @@
 @media(max-width:560px){.story-card{grid-template-columns:1fr}.story-card-cover{height:230px;min-height:0;border-right:0;border-bottom:1px solid var(--line)}.reader-overlay{padding:70px 10px 25px}.reader-paper{padding:28px 22px}.reader-content{font-size:17px}.reader-close{right:12px;top:12px}}
 
 
-
-/* Ajuste de ancho para las tarjetas de relatos */
-.stories-section #stories-container .story-series {
-  width: 100% !important;
-  max-width: none !important;
-}
-
-.stories-section #stories-container .story-grid {
-  display: grid !important;
+/* Corrección: relatos sin portada deben usar todo el ancho de la tarjeta */
+.stories-section .story-card:not(:has(.story-card-cover)) {
   grid-template-columns: minmax(0, 1fr) !important;
-  width: 100% !important;
 }
 
-.stories-section #stories-container .story-card {
-  display: grid !important;
-  grid-template-columns: 180px minmax(0, 1fr) !important;
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-.stories-section #stories-container .story-card-body {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-.stories-section #stories-container .story-card-body h4,
-.stories-section #stories-container .story-card-synopsis {
-  width: 100% !important;
-  max-width: none !important;
-  word-break: normal !important;
-  overflow-wrap: break-word !important;
-}
-
-@media (max-width: 560px) {
-  .stories-section #stories-container .story-card {
-    grid-template-columns: 1fr !important;
-  }
+.stories-section .story-card:not(:has(.story-card-cover)) .story-card-body {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
 }
