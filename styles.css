@@ -36,57 +36,44 @@
 @media(max-width:560px){.story-card{grid-template-columns:1fr}.story-card-cover{height:230px;min-height:0;border-right:0;border-bottom:1px solid var(--line)}.reader-overlay{padding:70px 10px 25px}.reader-paper{padding:28px 22px}.reader-content{font-size:17px}.reader-close{right:12px;top:12px}}
 
 
-/* Corrección definitiva del ancho de las tarjetas de relatos */
-.stories-section #stories-container,
-.stories-section .story-series,
-.stories-section .story-grid {
-  display: block;
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-}
 
-.stories-section .story-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 18px;
-}
-
-.stories-section .story-card {
-  display: grid !important;
-  grid-template-columns: 145px minmax(0, 1fr) !important;
+/* Ajuste de ancho para las tarjetas de relatos */
+.stories-section #stories-container .story-series {
   width: 100% !important;
   max-width: none !important;
+}
+
+.stories-section #stories-container .story-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important;
+}
+
+.stories-section #stories-container .story-card {
+  display: grid !important;
+  grid-template-columns: 180px minmax(0, 1fr) !important;
+  width: 100% !important;
   min-width: 0 !important;
 }
 
-.stories-section .story-card-body {
+.stories-section #stories-container .story-card-body {
   display: flex !important;
-  flex-direction: column;
+  flex-direction: column !important;
   align-items: stretch !important;
   width: 100% !important;
-  max-width: none !important;
   min-width: 0 !important;
 }
 
-.stories-section .story-card-body h4,
-.stories-section .story-card-synopsis {
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  overflow-wrap: normal;
-  word-break: normal;
-}
-
-.stories-section .story-read-button {
-  align-self: flex-start;
-  width: auto;
-  max-width: 100%;
-  white-space: nowrap;
+.stories-section #stories-container .story-card-body h4,
+.stories-section #stories-container .story-card-synopsis {
+  width: 100% !important;
+  max-width: none !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
 }
 
 @media (max-width: 560px) {
-  .stories-section .story-card {
+  .stories-section #stories-container .story-card {
     grid-template-columns: 1fr !important;
   }
 }
